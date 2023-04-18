@@ -7,15 +7,29 @@
 
 import SwiftUI
 
+let colums: [GridItem] = [
+    GridItem(.flexible()),
+    GridItem(.flexible()),
+    GridItem(.flexible()),
+]
+
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        GeometryReader { geometry in
+            VStack {
+                Spacer()
+                LazyVGrid(columns: colums) {
+                    ForEach(0..<9) { index in
+                       Circle()
+                            .foregroundColor(.brown.opacity(0.4))
+                            .frame(
+                                width: geometry.size.width/3 - 15,
+                                height: geometry.size.width/3 - 15)
+                    }
+                }
+                Spacer()
+            }
         }
-        .padding()
     }
 }
 
